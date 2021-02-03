@@ -4,15 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:padding="16dp"
+    tools:context="MainActivity">
 
     <TextView
+        android:id="@+id/text_ans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="No" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <FrameLayout
+        android:id="@+id/layout_image"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_ans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="#000000"
+            app:shapeAppearance="@style/roundedStyle"
+            tools:srcCompat="@drawable/yes_or_no" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?attr/indeterminateProgressStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bowlby_one_sc"
+        android:gravity="center_horizontal"
+        android:text="@string/text_description"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_image" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_description">
+
+        <ImageView
+            android:id="@+id/image_blink"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/timer"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/blink_bg"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Chronometer
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/insta_button"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/image_blink" />
+
+        <com.jackandphantom.instagramvideobutton.InstagramVideoButton
+            android:id="@+id/insta_button"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            app:enablePhotoTaking="true"
+            app:enableVideoRecording="true"
+            app:innerCircleColor="#19000000"
+            app:outerCircleColor="#80000000"
+            app:progressColor="#F44336" />
+
+        <ImageView
+            android:id="@+id/image_mic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/text_hold_to_rec"
+            android:src="@drawable/ic_mic_24dp"
+            app:tint="#F44336" />
+
+        <ImageView
+            android:id="@+id/image_shake"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/text_description_shake"
+            android:src="@drawable/ic_shake_86dp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
