@@ -18,6 +18,7 @@ import fbo.costa.yesorno.R
 import fbo.costa.yesorno.databinding.ActivityMainBinding
 import fbo.costa.yesorno.util.DataState
 import fbo.costa.yesorno.util.MainStateEvent
+import fbo.costa.yesorno.util.NetworkLiveData
 import java.util.*
 
 
@@ -26,11 +27,13 @@ class MainActivity : AppCompatActivity(), InstagramVideoButton.ActionListener,
     ShakeDetector.Listener {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var network: NetworkLiveData
     private val viewModel: MainViewModel by viewModels()
     private var blinkInfAnim: Animation? = null
     private var blink3xAnim: Animation? = null
     private var shakeAnim: Animation? = null
     private var canShake: Boolean = false
+    private var isNetworkAvailable: Boolean = false
     private var sd: ShakeDetector? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +41,14 @@ class MainActivity : AppCompatActivity(), InstagramVideoButton.ActionListener,
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        applicationContext
+        network = NetworkLiveData(this)
+        network.observe(this, { _isNetworkAvailable ->
+            isNetworkAvailable = _isNetworkAvailable
+            isOnline(isNetworkAvailable)
+        })
+
+        isNetworkAvailable = network.isOnline()
+        isOnline(isNetworkAvailable)
 
         blinkInfAnim = AnimationUtils.loadAnimation(this, R.anim.blink_inf_anim)
         blink3xAnim = AnimationUtils.loadAnimation(this, R.anim.blink_3x_anim)
@@ -98,6 +108,11 @@ class MainActivity : AppCompatActivity(), InstagramVideoButton.ActionListener,
             .load(url ?: R.drawable.yes_or_no)
             .centerCrop()
             .into(this)
+    }
+
+    private fun isOnline(isNetworkAvailable: Boolean) {
+        binding.textConnection.visibility =
+            if (isNetworkAvailable) View.INVISIBLE else View.VISIBLE
     }
 
     override fun onStartRecord() {

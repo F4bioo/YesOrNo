@@ -5,6 +5,7 @@
     <string name="text_description">Can\'t you make a decision?
         \nHold the button below an ask something.</string>
     <string name="text_description_shake">Now shake your phone to get an answer</string>
-    <string name="text_hold_to_rec">Hold to record, release to send </string>
+    <string name="text_hold_to_rec">Hold to record, release to send</string>
+    <string name="text_connection">No internet connection!</string>
 
 </resources>
