@@ -2,8 +2,8 @@
 ### This is an example project using
 
   - MVI architecture
-  - Hilt independence injection
-  - Coroutines, Flow
+  - Hilt dependency injection
+  - Coroutine, Flow
   - Retrofit
   - api https://yesno.wtf/
 
